@@ -1,0 +1,40 @@
+body {
+  font-style: arial, sans-serif;
+}
+li {
+  list-style: none;
+}
+.wrapper {
+  max-width: 800px;
+  margin: 30px auto;
+}
+.weather-card {
+  border: 4px solid #002b46;
+  border-radius: 5px;
+  padding: 20px;
+  color: #ffff;
+  background: linear-gradient(#253ab6, #1b5bc1);
+}
+.location {
+  font-size: 25px;
+  font-style: bold;
+}
+.current-temperature {
+  margin-left: 50px;
+}
+.current-temperature img {
+  display: block;
+  width: 64px;
+  margin-right: 50px;
+}
+.float-left {
+  float: left !important;
+}
+.current-temperature .temperature {
+  font-size: 30px;
+}
+.current-temperature .units {
+  position: relative;
+  font-size: 12px;
+  top: -12px;
+}

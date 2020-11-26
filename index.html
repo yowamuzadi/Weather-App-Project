@@ -14,42 +14,56 @@
   </head>
   <body>
     <div class="container">
-      <div class="weather-card">
-        <h1>Paris, France</h1>
-        <h4>Last updated: Thursday, November 26 12:09</h4>
-        <div class="row">
-          <div class="col-6">
-            <img
-              src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
-              alt="sun"
-            />10° C | F
-            <div>Mostly sunny</div>
+      <div class="wrapper">
+        <div class="weather-card">
+          <div class="  ">
+            <ul>
+              <li>
+                <span class="location city">Paris,</span
+                ><span class="location country"> France</span>
+              </li>
+              <small>Last updated: Thursday, November 26 12:09</small>
+              <li class="weather-description">Mostly sunny</li>
+            </ul>
           </div>
-          <div class="col-6">
-            <div class="row">
-              <div class="col-4">
-                <ul>
-                  <li>High:14</li>
-                  <li>Low:10</li>
-                </ul>
+          <div class="row">
+            <div class="col-6">
+              <div class="current-temperature">
+                <img
+                  src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
+                  alt="sun"
+                  class="float-left"
+                />
+                <div class="float-left">
+                  <span class="temperature">10°</span>
+                  <span class="units">C | F</span>
+                </div>
               </div>
-              <div class="col-4">
-                <ul>
-                  <li>Wind speed: 45km/h</li>
-                  <li>Low:10</li>
-                </ul>
-              </div>
-              <div class="col-4">
-                <ul>
-                  <li>Humidity: 30%</li>
-                  <li>Low:10</li>
-                </ul>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-6">
+                  <ul>
+                    <li class="temp">14°</li>
+                    <li>High</li>
+                    <li class="temp">10°</li>
+                    <li>Low</li>
+                  </ul>
+                </div>
+                <div class="col-6">
+                  <ul>
+                    <li>45km/h</li>
+                    <li>Wind speed</li>
+                    <li>10</li>
+                    <li>Humidity</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <small class="footer">Open-source code by Yowa Muzadi</small>
       </div>
-      <footer>Open-source code by Yowa Muzadi</footer>
     </div>
   </body>
   <script src="src/app.js"></script>
