@@ -16,16 +16,20 @@
     <div class="container">
       <div class="wrapper">
         <div class="weather-card">
-          <div class="  ">
+          <div class="location-and-date">
             <ul>
               <li>
                 <span class="location city">Paris,</span
                 ><span class="location country"> France</span>
               </li>
-              <small>Last updated: Thursday, November 26 12:09</small>
-              <li class="weather-description">Mostly sunny</li>
+              <li>
+                <small>Last updated: Thursday, November 26 12:09</small>
+              </li>
+              <!-- <div class="weather-description">Mostly sunny</div> -->
             </ul>
           </div>
+          <br />
+          <br />
           <div class="row">
             <div class="col-6">
               <div class="current-temperature">
@@ -40,22 +44,25 @@
                 </div>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-6 current-stats">
               <div class="row">
-                <div class="col-6">
+                <div class="col-2"></div>
+                <div class="col-4">
                   <ul>
-                    <li class="temp">14°</li>
-                    <li>High</li>
-                    <li class="temp">10°</li>
-                    <li>Low</li>
+                    <li class="value">14°</li>
+                    <li class="data-type">High</li>
+                    <br />
+                    <li class="value">10°</li>
+                    <li class="data-type">Low</li>
                   </ul>
                 </div>
                 <div class="col-6">
                   <ul>
-                    <li>45km/h</li>
-                    <li>Wind speed</li>
-                    <li>10</li>
-                    <li>Humidity</li>
+                    <li class="value">45km/h</li>
+                    <li class="data-type">Wind speed</li>
+                    <br />
+                    <li class="value">10</li>
+                    <li class="data-type">Humidity</li>
                   </ul>
                 </div>
               </div>
