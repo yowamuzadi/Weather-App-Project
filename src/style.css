@@ -1,43 +1,23 @@
-body {
-  font-family: "open sans", sans-serif;
+.main-card {
+  border-width: 3px;
+  margin-top: 30px;
+  padding: 50px;
 }
-li {
-  list-style: none;
+
+.date-card {
+  border-width: 2px;
+  padding-top: 5px;
 }
-.wrapper {
-  max-width: 800px;
-  margin: 30px auto;
+
+.prev .card-title {
+  text-align: center;
 }
-.weather-card {
-  border-radius: 5px;
-  padding: 20px 20px 150px 10px;
-  color: rgb(255, 255, 255);
-  background: linear-gradient(rgb(43, 50, 178) 0%, rgb(20, 136, 204) 100%);
-}
-.location {
-  font-size: 25px;
-  font-style: bold;
-}
-.current-temperature {
-  margin-left: 50px;
-}
-.current-temperature img {
+
+.prev .card-img-top {
+  width: 50%;
   display: block;
-  width: 30%;
-  margin-right: 50px;
+  margin: 0 auto;
 }
-.current-temperature .temperature {
-  font-size: 70px;
-}
-.float-left {
-  float: left !important;
-}
-.current-temperature .units {
-  position: relative;
-  font-size: 12px;
-  top: -12px;
-}
-.current-stats .data-type {
-  font-size: smaller;
-  color: rgba(255, 255, 255, 0.76);
+#city {
+  text-transform: capitalize;
 }
