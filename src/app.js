@@ -20,3 +20,25 @@ function showCurrentTime(date) {
   let currentMinutesValue = now.getMinutes();
   currentTime.innerHTML = `${currentHoursValue}:${currentMinutesValue}`;
 }
+function showCurrentDate(date) {
+  let now = new Date();
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  let currentDate = document.querySelector("#current-date");
+  let currentDateValue = now.getDate();
+  let currentMonthValue = now.getMonth();
+  let currentYearValue = now.getFullYear();
+  currentDate.innerHTML = `${months[currentMonthValue]} ${currentDateValue}, ${currentYearValue}`;
+}
