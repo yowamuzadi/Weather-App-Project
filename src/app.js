@@ -13,3 +13,10 @@ function showCurrentDay(date) {
   let currentDayValue = now.getDay();
   currentDay.innerHTML = `${days[currentDayValue]}`;
 }
+function showCurrentTime(date) {
+  let now = new Date();
+  let currentTime = document.querySelector("#current-time");
+  let currentHoursValue = now.getHours();
+  let currentMinutesValue = now.getMinutes();
+  currentTime.innerHTML = `${currentHoursValue}:${currentMinutesValue}`;
+}
