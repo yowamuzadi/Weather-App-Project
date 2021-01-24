@@ -79,3 +79,26 @@ function handleSubmit(event) {
   let city = document.getElementById("city-input").value;
   searchCity(city);
 }
+// Getting the weather using geolocation
+function retrievePosition(position) {
+  let weatherApiKey = "8165a17b0d39ff333ddf1c75c84ef1bb";
+  let units = "metric";
+  let currentLatitude = position.coords.latitude;
+  let currentLongitude = position.coords.longitude;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${currentLatitude}&lon=${currentLongitude}&units=${units}&appid=${weatherApiKey}`;
+  axios.get(apiUrl).then(displayWeather);
+}
+function geolocate(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(retrievePosition);
+}
+
+let now = new Date();
+showCurrentDay(now);
+showCurrentTime(now);
+showCurrentDate(now);
+let search = document.querySelector("#search-form");
+let searchCurrentLocation = document.querySelector("#current-location-btn");
+searchCurrentLocation.addEventListener("click", geolocate);
+search.addEventListener("submit", handleSubmit);
+searchCity("Paris");
