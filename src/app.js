@@ -40,25 +40,30 @@ function displayDate(date) {
 // Getting the weather info from the weather API and diplaying it
 function displayWeather(response) {
   let cityElement = document.querySelector("#city");
-  let cityResponse = `${response.data.name}`;
-  cityElement.innerHTML = `${cityResponse}`;
-
   let temperatureElement = document.querySelector("#current-temperature");
-  let temperatureResponse = Math.round(response.data.main.temp);
-  temperatureElement.innerHTML = temperatureResponse;
-
-  let weatherDescriptionResponse = response.data.weather[0].main;
   let weatherDescriptionElement = document.getElementById(
     "weather-description"
   );
+  let mainIconElement = document.querySelector("#main-icon");
+  let humidityElement = document.querySelector("#humidity");
+  let feelsLikeElement = document.querySelector("#feels-like");
+  let temperatureResponse = Math.round(response.data.main.temp);
+  let weatherDescriptionResponse = response.data.weather[0].main;
+  let cityResponse = `${response.data.name}`;
+  let iconResponse = `${response.data.weather[0].icon}`;
   weatherDescriptionElement.innerHTML = `${weatherDescriptionResponse}`;
-  document.querySelector("#humidity").innerHTML = response.data.main.humidity;
-  document.querySelector("#feels-like").innerHTML = Math.round(
-    response.data.main.feels_like
-  );
+  cityElement.innerHTML = `${cityResponse}`;
+  temperatureElement.innerHTML = temperatureResponse;
+  humidityElement.innerHTML = response.data.main.humidity;
+  feelsLikeElement.innerHTML = Math.round(response.data.main.feels_like);
   document.querySelector("#wind").innerHTML = Math.round(
     response.data.wind.speed
   );
+  mainIconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${iconResponse}@2x.png`
+  );
+  mainIconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
 function searchCity(city) {
