@@ -1,26 +1,4 @@
-function showCurrentDay(date) {
-  let now = new Date();
-  let days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-  let currentDay = document.querySelector("#current-day");
-  let currentDayValue = now.getDay();
-  currentDay.innerHTML = `${days[currentDayValue]}`;
-}
-function showCurrentTime(date) {
-  let now = new Date();
-  let currentTime = document.querySelector("#current-time");
-  let currentHoursValue = now.getHours();
-  let currentMinutesValue = now.getMinutes();
-  currentTime.innerHTML = `${currentHoursValue}:${currentMinutesValue}`;
-}
-function showCurrentDate(date) {
+function displayDate(date) {
   let now = new Date();
   let months = [
     "January",
@@ -36,10 +14,26 @@ function showCurrentDate(date) {
     "November",
     "December",
   ];
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let currentDay = document.querySelector("#current-day");
+  let currentTime = document.querySelector("#current-time");
   let currentDate = document.querySelector("#current-date");
   let currentDateValue = now.getDate();
+  let currentDayValue = now.getDay();
   let currentMonthValue = now.getMonth();
   let currentYearValue = now.getFullYear();
+  let currentHoursValue = now.getHours();
+  let currentMinutesValue = now.getMinutes();
+  currentDay.innerHTML = `${days[currentDayValue]}`;
+  currentTime.innerHTML = `${currentHoursValue}:${currentMinutesValue}`;
   currentDate.innerHTML = `${months[currentMonthValue]} ${currentDateValue}, ${currentYearValue}`;
 }
 
@@ -92,11 +86,8 @@ function geolocate(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(retrievePosition);
 }
-
 let now = new Date();
-showCurrentDay(now);
-showCurrentTime(now);
-showCurrentDate(now);
+displayDate(now);
 let search = document.querySelector("#search-form");
 let searchCurrentLocation = document.querySelector("#current-location-btn");
 searchCurrentLocation.addEventListener("click", geolocate);
