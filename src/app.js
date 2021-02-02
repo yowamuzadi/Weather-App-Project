@@ -39,6 +39,7 @@ function displayDate(date) {
 
 // Getting the weather info from the weather API and diplaying it
 function displayWeather(response) {
+  celsiusTemperature = response.data.main.temp;
   let cityElement = document.querySelector("#city");
   let temperatureElement = document.querySelector("#current-temperature");
   let weatherDescriptionElement = document.getElementById(
@@ -65,7 +66,6 @@ function displayWeather(response) {
   );
   mainIconElement.setAttribute("alt", response.data.weather[0].description);
 }
-
 function searchCity(city) {
   let weatherApiKey = "8165a17b0d39ff333ddf1c75c84ef1bb";
   let units = "metric";
@@ -78,6 +78,7 @@ function handleSubmit(event) {
   let city = document.getElementById("city-input").value;
   searchCity(city);
 }
+
 // Getting the weather using geolocation
 function retrievePosition(position) {
   let weatherApiKey = "8165a17b0d39ff333ddf1c75c84ef1bb";
@@ -91,10 +92,35 @@ function geolocate(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(retrievePosition);
 }
+
+function displayFTemp(event) {
+  event.preventDefault();
+  celsius.classList.remove("active");
+  fahrenheit.classList.add("active");
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  let temperatureElement = document.querySelector("#current-temperature");
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+}
+function displayCTemp(event) {
+  event.preventDefault();
+  fahrenheit.classList.remove("active");
+  celsius.classList.add("active");
+  let temperatureElement = document.querySelector("#current-temperature");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+let celsiusTemperature = null;
 let now = new Date();
-displayDate(now);
 let search = document.querySelector("#search-form");
 let searchCurrentLocation = document.querySelector("#current-location-btn");
+
+let fahrenheit = document.querySelector("#fahrenheit");
+fahrenheit.addEventListener("click", displayFTemp);
+
+let celsius = document.querySelector("#celsius");
+celsius.addEventListener("click", displayCTemp);
+
+displayDate(now);
 searchCurrentLocation.addEventListener("click", geolocate);
 search.addEventListener("submit", handleSubmit);
 searchCity("Paris");
