@@ -1,34 +1,47 @@
+.wrapper {
+  margin: 30px auto;
+}
 .card {
   margin-top: 30px;
   background-color: #f8f9fa;
+  border-radius: 20px;
   border: none;
+  box-shadow: 5px 5px 10px #e6e9ee;
 }
 .main-card {
   border-width: 1px;
   margin-top: 30px;
   padding: 10px;
 }
+.weather-forecast {
+  margin-right: 20px;
+}
+.weather-forecast .card-body {
+  border-radius: 20px;
+  background-color: #f8f9fa !important;
+  box-shadow: 5px 5px 10px #e6e9ee;
+}
 .prev .card-title {
   text-align: center;
 }
 .active {
-  color: rgb(0, 0, 0);
+  color: #000000;
   cursor: default;
 }
 .active:hover {
   text-decoration: none;
-  color: rgb(0, 0, 0);
+  color: #000000;
 }
 .weather-forecast {
   margin-top: 30px;
+}
+.weather-forecast .col-12 {
+  text-align: center;
 }
 .weather-forecast img {
   width: 50px;
   display: block;
   margin: 0 auto;
-}
-.weather-forecast .col-12 {
-  text-align: center;
 }
 .col-8 {
   display: flex;
@@ -39,6 +52,17 @@
   display: block;
   margin: 0 auto;
 }
+.weather-app-title {
+  font-size: 25px;
+  padding-top: 10px;
+  padding-left: 30px;
+  color: #026ad9b4;
+}
+#city,
+#weather-description {
+  color: #6c757d;
+}
 #city {
   text-transform: capitalize;
+  font-size: 45px;
 }

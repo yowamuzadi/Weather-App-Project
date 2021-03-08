@@ -24,25 +24,14 @@ function displayDate(date) {
     "Saturday",
   ];
   let currentDay = document.querySelector("#current-day");
-  let currentTime = document.querySelector("#current-time");
   let currentDate = document.querySelector("#current-date");
   let currentDateValue = now.getDate();
   let currentDayValue = now.getDay();
   let currentMonthValue = now.getMonth();
   let currentYearValue = now.getFullYear();
-  let currentHoursValue = now.getHours();
-  let currentMinutesValue = now.getMinutes();
-  if (currentHoursValue < 10) {
-    currentHoursValue = `0${currentHoursValue}`;
-  }
-  if (currentMinutesValue < 10) {
-    currentMinutesValue = `0${currentMinutesValue}`;
-  }
   currentDay.innerHTML = `${days[currentDayValue]}`;
-  currentTime.innerHTML = `${currentHoursValue}:${currentMinutesValue}`;
   currentDate.innerHTML = `${months[currentMonthValue]} ${currentDateValue}, ${currentYearValue}`;
 }
-
 function formatHour(timestamp) {
   let date = new Date(timestamp);
   let hours = date.getHours();
@@ -67,10 +56,12 @@ function displayWeather(response) {
   let mainIconElement = document.querySelector("#main-icon");
   let humidityElement = document.querySelector("#humidity");
   let feelsLikeElement = document.querySelector("#feels-like");
+  let currentTime = document.querySelector("#current-time");
   let temperatureResponse = Math.round(response.data.main.temp);
   let weatherDescriptionResponse = response.data.weather[0].main;
   let cityResponse = `${response.data.name}`;
   let iconResponse = `${response.data.weather[0].icon}`;
+  currentTime.innerHTML = `${formatHour(response.data.dt * 1000)}`;
   weatherDescriptionElement.innerHTML = `${weatherDescriptionResponse}`;
   cityElement.innerHTML = `${cityResponse}`;
   temperatureElement.innerHTML = temperatureResponse;
@@ -87,9 +78,12 @@ function displayWeather(response) {
 }
 function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
-  let forecast = response.data.list[0];
+  forecastElement.innerHTML = null;
+  let forecast = null;
   console.log(forecast);
-  forecastElement.innerHTML = `
+  for (let index = 0; index < 5; index++) {
+    forecast = response.data.list[index];
+    forecastElement.innerHTML += `
   <div class="bg-light mb-3 prev card-body">
             <div class="card-title">${formatHour(forecast.dt * 1000)}</div>
             <img src="http://openweathermap.org/img/wn/${
@@ -111,75 +105,7 @@ function displayForecast(response) {
             </div>
           </div>
   `;
-  forecast = response.data.list[1];
-  forecastElement.innerHTML += `
-  <div class="bg-light mb-3 prev card-body">
-            <div class="card-title">${formatHour(forecast.dt * 1000)}</div>
-            <img src="http://openweathermap.org/img/wn/${
-              forecast.weather[0].icon
-            }@2x.png" />
-            <div class="card-title"><strong>${Math.round(
-              forecast.main.temp
-            )}°</strong> 7°</div>
-            <div class="card-text row">
-                <small class="col-12">Feels like: ${Math.round(
-                  forecast.main.feels_like
-                )}°</small>
-                <small class="col-12">Humidity: ${
-                  forecast.main.humidity
-                }%</small>
-                <small class="col-12">Wind: ${Math.round(
-                  forecast.wind.speed
-                )}km/h</small>
-            </div>
-          </div>
-  `;
-  forecast = response.data.list[2];
-  forecastElement.innerHTML += `
-  <div class="bg-light mb-3 prev card-body">
-            <div class="card-title">${formatHour(forecast.dt * 1000)}</div>
-            <img src="http://openweathermap.org/img/wn/${
-              forecast.weather[0].icon
-            }@2x.png" />
-            <div class="card-title"><strong>${Math.round(
-              forecast.main.temp
-            )}°</strong> 7°</div>
-            <div class="card-text row">
-                <small class="col-12">Feels like: ${Math.round(
-                  forecast.main.feels_like
-                )}°</small>
-                <small class="col-12">Humidity: ${
-                  forecast.main.humidity
-                }%</small>
-                <small class="col-12">Wind: ${Math.round(
-                  forecast.wind.speed
-                )}km/h</small>
-            </div>
-          </div>
-  `;
-  forecast = response.data.list[3];
-  forecastElement.innerHTML += `
-  <div class="bg-light mb-3 prev card-body">
-            <div class="card-title">${formatHour(forecast.dt * 1000)}</div>
-            <img src="http://openweathermap.org/img/wn/${
-              forecast.weather[0].icon
-            }@2x.png" />
-            <div class="card-title"><strong>${Math.round(
-              forecast.main.temp
-            )}°</strong> 7°</div>
-            <div class="card-text row">
-                <small class="col-12">Feels like: ${Math.round(
-                  forecast.main.feels_like
-                )}°</small>
-                <small class="col-12">Humidity: ${
-                  forecast.main.humidity
-                }%</small>
-                <small class="col-12">Wind: ${Math.round(
-                  forecast.wind.speed
-                )}km/h</small>
-            </div>
-          </div>
-  `;
+  }
 }
 function searchCity(city) {
   let weatherApiKey = "8165a17b0d39ff333ddf1c75c84ef1bb";
