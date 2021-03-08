@@ -1,168 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>What's the weather?</title>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
-  <link rel="stylesheet" href="src/style.css" />
-</head>
-<body>
-  <div class="container">
-    <div class="row">
-      <div class="col-3">
-      </div>
-      <div class="col-6">
-        <div class="card main-card">
-          <div class="card-body">
-            <div class="row">
-              <div class="col">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>What's the weather?</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="src/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-2 weather-forecast" id="forecast"></div>
+        <div class="col-6 card">
+          <div class="col-11 main-card">
+              <div class="card-body">
                 <h2 class="card-title" id="city"></h2>
-                <h1 class="card-subtitle mb-2 text-muted" id="current-temperature"></h1>
-                <small class=mesure-units><a href="#" id="celsius" class="active">C°</a> | <a href="#" id="fahrenheit">F°</a></small>
-                <h3 class="card-title" id="weather-description"></h3>
-                  <div class="card-text">
-                    <div class="row">
-                      <small class="col-12">Feels like: <span id="feels-like"></span>°C</small>
-                      <small class="col-12">Humidity: <span id="humidity"></span>%</small>
-                      <small class="col-12">Wind: <span id="wind"></span>km/h</small>
+                <div class="row">
+                  <div class="col-7">
+                    <h1
+                      class="card-subtitle mb-2 text-muted"
+                      id="current-temperature"
+                    ></h1>
+                    <small class="mesure-units"
+                      ><a href="#" id="celsius" class="active">C°</a> |
+                      <a href="#" id="fahrenheit">F°</a></small
+                    >
+                    <h3 class="card-title" id="weather-description"></h3>
+                    <div class="card-text">
+                      <div class="row">
+                        <small class="col-12"
+                          >Feels like: <span id="feels-like"></span>°C</small
+                        >
+                        <small class="col-12"
+                          >Humidity: <span id="humidity"></span>%</small
+                        >
+                        <small class="col-12"
+                          >Wind: <span id="wind"></span>km/h</small
+                        >
+                      </div>
                     </div>
                   </div>
-              </div>
-              <span class="col-5">
-                <img src="" class="card-img" alt="sun-icon" id="main-icon"/>
-              </span>
+                  <span class="weather-img col-4">
+                    <img
+                      src=""
+                      class="card-img"
+                      alt="sun-icon"
+                      id="main-icon"
+                    />
+                  </span>
+                </div>
+                <div>
+                  <small>Last updated:</small>
+                  <small id="current-day"></small>,
+                  <small id="current-date"></small>
+                  <small id="current-time"></small>
+                </div>
+          </div>
+          <div class="search col-10 row">
+            <div class="col-6">
+            <form id="search-form">
+              <input
+                id="city-input"
+                type="text"
+                class="form-control"
+                placeholder="Enter city"
+                autofocus="on"
+                autocomplete="off"
+              />
+            </form>
             </div>
-            <div>
-             <small>Last updated:</small>
-            <small id="current-day"></small>,
-            <small id="current-date"></small>
-            <small id="current-time"></small>
+            <div class="col-3">
+              <form>
+            <input type="submit" class="btn btn-primary" value="Search" id="submit-city-button" />
+            </form>
             </div>
-          </div>
+              <div class="col-3">
+                <button class="btn btn-success" id="current-location-btn">
+                  Current
+                </button>
+              </div>
+            </div>
         </div>
       </div>
     </div>
-    <br />
-    <div class="row">
-      <div class="col-3"></div>
-      <div class="col-3">
-        <form id="search-form">
-          <input id="city-input" type="text" class="form-control" placeholder="Enter city" autofocus="on"
-            autocomplete="off" />
-        </form>
-      </div>
-      <div class="col-1">
-        <form>
-          <input type="submit" class="btn btn-primary" value="Search" id="submit-city-button" />
-        </form>
-      </div>
-      <div class="col-1">
-        <button class="btn btn-success" id="current-location-btn">Current</button>
-      </div>
-    </div>
-    <br />
-    <div class="row">
-      <div class="col-2">
-        <div class="card bg-light mb-3 prev">
-          <div class="card-body">
-            <h5 class="card-title">Mon</h5>
-            <img src="media/sun.png" class="card-img-top" alt="sun icon" />
-            <h5 class="card-title">22°C</h5>
-            <p class="card-text">
-              <div class="row">
-                <small class="col-12">Precipitation: 20%</small>
-                <small class="col-12">Humidity:23%</small>
-                <small class="col-12">Wind: 7km/h</small>
-              </div>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-2">
-        <div class="card bg-light mb-3 prev">
-          <div class="card-body">
-            <h5 class="card-title">Tue</h5>
-            <img src="media/sun.png" class="card-img-top" alt="sun icon" />
-            <h5 class="card-title">22°C</h5>
-            <p class="card-text">
-              <div class="row">
-                <small class="col-12">Precipitation: 20%</small>
-                <small class="col-12">Humidity:23%</small>
-                <small class="col-12">Wind: 7km/h</small>
-              </div>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-2">
-        <div class="card bg-light mb-3 prev">
-          <div class="card-body">
-            <h5 class="card-title">Wed</h5>
-            <img src="media/sun.png" class="card-img-top" alt="sun icon" />
-            <h5 class="card-title">22°C</h5>
-            <p class="card-text">
-              <div class="row">
-                <small class="col-12">Precipitation: 20%</small>
-                <small class="col-12">Humidity:23%</small>
-                <small class="col-12">Wind: 7km/h</small>
-              </div>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-2">
-        <div class="card bg-light mb-3 prev">
-          <div class="card-body">
-            <h5 class="card-title">Thu</h5>
-            <img src="media/sun.png" class="card-img-top" alt="sun icon" />
-            <h5 class="card-title">22°C</h5>
-            <p class="card-text">
-              <div class="row">
-                <small class="col-12">Precipitation: 20%</small>
-                <small class="col-12">Humidity:23%</small>
-                <small class="col-12">Wind: 7km/h</small>
-              </div>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-2">
-        <div class="card bg-light mb-3 prev">
-          <div class="card-body">
-            <h5 class="card-title">Fri</h5>
-            <img src="media/sun.png" class="card-img-top" alt="sun icon" />
-            <h5 class="card-title">22°C</h5>
-            <p class="card-text">
-              <div class="row">
-                <small class="col-12">Precipitation: 20%</small>
-                <small class="col-12">Humidity:23%</small>
-                <small class="col-12">Wind: 7km/h</small>
-              </div>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-2">
-        <div class="card bg-light mb-3 prev">
-          <div class="card-body">
-            <h5 class="card-title">Sat</h5>
-            <img src="media/sun.png" class="card-img-top" alt="sun icon" />
-            <h5 class="card-title">22°C</h5>
-            <p class="card-text">
-              <div class="row">
-                <small class="col-12">Precipitation: 20%</small>
-                <small class="col-12">Humidity:23%</small>
-                <small class="col-12">Wind: 7km/h</small>
-              </div>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <script src="src/app.js"></script>
-</body>
+    <script src="src/app.js"></script>
+  </body>
 </html>

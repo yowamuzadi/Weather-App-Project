@@ -32,9 +32,28 @@ function displayDate(date) {
   let currentYearValue = now.getFullYear();
   let currentHoursValue = now.getHours();
   let currentMinutesValue = now.getMinutes();
+  if (currentHoursValue < 10) {
+    currentHoursValue = `0${currentHoursValue}`;
+  }
+  if (currentMinutesValue < 10) {
+    currentMinutesValue = `0${currentMinutesValue}`;
+  }
   currentDay.innerHTML = `${days[currentDayValue]}`;
   currentTime.innerHTML = `${currentHoursValue}:${currentMinutesValue}`;
   currentDate.innerHTML = `${months[currentMonthValue]} ${currentDateValue}, ${currentYearValue}`;
+}
+
+function formatHour(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  return `${hours}:${minutes}`;
 }
 
 // Getting the weather info from the weather API and diplaying it
@@ -66,11 +85,109 @@ function displayWeather(response) {
   );
   mainIconElement.setAttribute("alt", response.data.weather[0].description);
 }
+function displayForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  let forecast = response.data.list[0];
+  console.log(forecast);
+  forecastElement.innerHTML = `
+  <div class="bg-light mb-3 prev card-body">
+            <div class="card-title">${formatHour(forecast.dt * 1000)}</div>
+            <img src="http://openweathermap.org/img/wn/${
+              forecast.weather[0].icon
+            }@2x.png" />
+            <div class="card-title"><strong>${Math.round(
+              forecast.main.temp
+            )}°</strong> 7°</div>
+            <div class="card-text row">
+                <small class="col-12">Feels like: ${Math.round(
+                  forecast.main.feels_like
+                )}°</small>
+                <small class="col-12">Humidity: ${
+                  forecast.main.humidity
+                }%</small>
+                <small class="col-12">Wind: ${Math.round(
+                  forecast.wind.speed
+                )}km/h</small>
+            </div>
+          </div>
+  `;
+  forecast = response.data.list[1];
+  forecastElement.innerHTML += `
+  <div class="bg-light mb-3 prev card-body">
+            <div class="card-title">${formatHour(forecast.dt * 1000)}</div>
+            <img src="http://openweathermap.org/img/wn/${
+              forecast.weather[0].icon
+            }@2x.png" />
+            <div class="card-title"><strong>${Math.round(
+              forecast.main.temp
+            )}°</strong> 7°</div>
+            <div class="card-text row">
+                <small class="col-12">Feels like: ${Math.round(
+                  forecast.main.feels_like
+                )}°</small>
+                <small class="col-12">Humidity: ${
+                  forecast.main.humidity
+                }%</small>
+                <small class="col-12">Wind: ${Math.round(
+                  forecast.wind.speed
+                )}km/h</small>
+            </div>
+          </div>
+  `;
+  forecast = response.data.list[2];
+  forecastElement.innerHTML += `
+  <div class="bg-light mb-3 prev card-body">
+            <div class="card-title">${formatHour(forecast.dt * 1000)}</div>
+            <img src="http://openweathermap.org/img/wn/${
+              forecast.weather[0].icon
+            }@2x.png" />
+            <div class="card-title"><strong>${Math.round(
+              forecast.main.temp
+            )}°</strong> 7°</div>
+            <div class="card-text row">
+                <small class="col-12">Feels like: ${Math.round(
+                  forecast.main.feels_like
+                )}°</small>
+                <small class="col-12">Humidity: ${
+                  forecast.main.humidity
+                }%</small>
+                <small class="col-12">Wind: ${Math.round(
+                  forecast.wind.speed
+                )}km/h</small>
+            </div>
+          </div>
+  `;
+  forecast = response.data.list[3];
+  forecastElement.innerHTML += `
+  <div class="bg-light mb-3 prev card-body">
+            <div class="card-title">${formatHour(forecast.dt * 1000)}</div>
+            <img src="http://openweathermap.org/img/wn/${
+              forecast.weather[0].icon
+            }@2x.png" />
+            <div class="card-title"><strong>${Math.round(
+              forecast.main.temp
+            )}°</strong> 7°</div>
+            <div class="card-text row">
+                <small class="col-12">Feels like: ${Math.round(
+                  forecast.main.feels_like
+                )}°</small>
+                <small class="col-12">Humidity: ${
+                  forecast.main.humidity
+                }%</small>
+                <small class="col-12">Wind: ${Math.round(
+                  forecast.wind.speed
+                )}km/h</small>
+            </div>
+          </div>
+  `;
+}
 function searchCity(city) {
   let weatherApiKey = "8165a17b0d39ff333ddf1c75c84ef1bb";
   let units = "metric";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${weatherApiKey}`;
   axios.get(apiUrl).then(displayWeather);
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=${units}&appid=${weatherApiKey}`;
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function handleSubmit(event) {

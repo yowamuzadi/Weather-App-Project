@@ -1,17 +1,15 @@
+.card {
+  margin-top: 30px;
+  background-color: #f8f9fa;
+  border: none;
+}
 .main-card {
-  border-width: 3px;
+  border-width: 1px;
   margin-top: 30px;
   padding: 10px;
 }
-
 .prev .card-title {
   text-align: center;
-}
-
-.prev .card-img-top {
-  width: 50%;
-  display: block;
-  margin: 0 auto;
 }
 .active {
   color: rgb(0, 0, 0);
@@ -20,6 +18,26 @@
 .active:hover {
   text-decoration: none;
   color: rgb(0, 0, 0);
+}
+.weather-forecast {
+  margin-top: 30px;
+}
+.weather-forecast img {
+  width: 50px;
+  display: block;
+  margin: 0 auto;
+}
+.weather-forecast .col-12 {
+  text-align: center;
+}
+.col-8 {
+  display: flex;
+  flex-wrap: middle;
+}
+.weather-img {
+  width: 50px;
+  display: block;
+  margin: 0 auto;
 }
 #city {
   text-transform: capitalize;
