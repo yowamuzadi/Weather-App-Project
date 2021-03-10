@@ -130,6 +130,8 @@ function retrievePosition(position) {
   let currentLongitude = position.coords.longitude;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${currentLatitude}&lon=${currentLongitude}&units=${units}&appid=${weatherApiKey}`;
   axios.get(apiUrl).then(displayWeather);
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${currentLatitude}&lon=${currentLongitude}&units=${units}&appid=${weatherApiKey}`;
+  axios.get(apiUrl).then(displayForecast);
 }
 function geolocate(event) {
   event.preventDefault();
